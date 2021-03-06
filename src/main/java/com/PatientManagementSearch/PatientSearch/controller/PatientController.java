@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/patient")
+@CrossOrigin("*")
 public class PatientController {
 
     @Autowired
@@ -19,13 +20,12 @@ public class PatientController {
     @Autowired
     private InvoiceService invoiceService;
 
-    @CrossOrigin
+
     @PostMapping(value = "/registration")
     public PatientResponseDto saveDetails(@RequestBody PatientRequestDto patientRequestDto) {
         return patientService.saveDetails(patientRequestDto);
     }
 
-    @CrossOrigin
     @PutMapping("/makePayment/{patientId}")
     public InvoiceResponseDto makePaymentAndBookDoctor(@PathVariable("patientId") int patientId, @RequestBody InvoiceRequestDto invoiceRequestDto) {
         return invoiceService.makePaymentAndBookDoctor(patientId, invoiceRequestDto);

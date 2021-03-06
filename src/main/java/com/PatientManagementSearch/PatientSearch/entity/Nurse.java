@@ -6,7 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
-@Entity(name = "nurse_search")
+@Entity(name = "nurseSearch")
 @Data
 public class Nurse {
 

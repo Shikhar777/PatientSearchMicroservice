@@ -12,5 +12,4 @@ public class HistoryResponseDto {
     private String doctorName;
     private String month;
     private String issue;
-    private long doctorContact;
 }

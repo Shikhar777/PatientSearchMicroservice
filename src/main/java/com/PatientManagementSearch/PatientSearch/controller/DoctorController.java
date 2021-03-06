@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/doctor")
+@CrossOrigin("*")
 public class DoctorController {
 
     @Autowired
@@ -20,7 +21,7 @@ public class DoctorController {
         return doctorService.saveDetails(doctorRequestDto);
     }
 
-    @CrossOrigin
+
     @PutMapping("/endConsultation")
     public void endConsultation(@RequestBody HistoryRequestDto historyRequestDto) {
         doctorService.endConsultation(historyRequestDto);

@@ -6,11 +6,12 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
-@Entity(name = "patient_search")
+@Entity(name = "patientSearch")
 @Data
 public class Patient {
 
     @Id
+    @org.springframework.data.annotation.Id
     @GenericGenerator(name = "patient_id_seq", strategy = "increment")
     @GeneratedValue(generator = "patient_id_seq", strategy = GenerationType.AUTO)
     private int patientId;

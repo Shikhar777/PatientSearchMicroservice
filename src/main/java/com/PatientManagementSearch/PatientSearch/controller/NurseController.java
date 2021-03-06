@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/nurse")
+@CrossOrigin("*")
 public class NurseController {
 
     @Autowired
     private NurseService nurseService;
 
-    @CrossOrigin
     @PostMapping(value = "/")
     public NurseResponseDto saveDetails(@RequestBody NurseRequestDto nurseRequestDto)
     {

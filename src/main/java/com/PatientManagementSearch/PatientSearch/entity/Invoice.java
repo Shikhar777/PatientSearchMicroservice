@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity(name = "invoice_search")
+@Entity(name = "invoiceSearch")
 @Data
 public class Invoice {
 
