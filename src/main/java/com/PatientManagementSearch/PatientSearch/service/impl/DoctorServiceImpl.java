@@ -5,7 +5,6 @@ import com.PatientManagementSearch.PatientSearch.dto.DoctorResponseDto;
 import com.PatientManagementSearch.PatientSearch.dto.HistoryRequestDto;
 import com.PatientManagementSearch.PatientSearch.entity.Doctor;
 import com.PatientManagementSearch.PatientSearch.entity.History;
-import com.PatientManagementSearch.PatientSearch.entity.Invoice;
 import com.PatientManagementSearch.PatientSearch.entity.Nurse;
 import com.PatientManagementSearch.PatientSearch.repository.*;
 import com.PatientManagementSearch.PatientSearch.service.DoctorService;
