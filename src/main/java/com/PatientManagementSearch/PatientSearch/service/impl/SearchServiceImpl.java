@@ -7,6 +7,7 @@ import com.PatientManagementSearch.PatientSearch.entity.History;
 import com.PatientManagementSearch.PatientSearch.repository.HistoryRepository;
 import com.PatientManagementSearch.PatientSearch.searchrepo.SearchRepository;
 import com.PatientManagementSearch.PatientSearch.service.SearchService;
+import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.BeanUtils;
@@ -53,8 +54,11 @@ public class SearchServiceImpl implements SearchService {
     {
         text =  text.replace(" ","+");
         QueryBuilder queryBuilder = QueryBuilders.boolQuery().should(QueryBuilders.queryStringQuery(text)
-        .lenient(true).field("issue").field("month").field("patientName")).should(QueryBuilders.queryStringQuery("*" + text + "*")
-        .lenient(true).field("issue").field("month").field("patientName"));
+        .lenient(true).field("issue").fuzziness(Fuzziness.fromEdits(2)).field("month").fuzziness(Fuzziness.fromEdits(2))
+                .field("patientName").fuzziness(Fuzziness.fromEdits(2)).field("patientId").fuzziness(Fuzziness.fromEdits(2))).
+                should(QueryBuilders.queryStringQuery("*" + text + "*")
+        .lenient(true).field("issue").fuzziness(Fuzziness.fromEdits(2)).field("month").fuzziness(Fuzziness.fromEdits(2))
+                        .field("patientName").fuzziness(Fuzziness.fromEdits(2)).field("patientId").fuzziness(Fuzziness.fromEdits(2)));
 
         NativeSearchQuery nativeSearchQuery = new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
         List<History> historyList = elasticsearchRestTemplate.queryForList(nativeSearchQuery, History.class,
