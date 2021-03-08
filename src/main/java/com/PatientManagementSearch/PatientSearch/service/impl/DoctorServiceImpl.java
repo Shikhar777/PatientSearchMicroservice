@@ -73,21 +73,6 @@ public class DoctorServiceImpl implements DoctorService {
         int patientId = historyRequestDto.getPatientId();
         int doctorId = historyRequestDto.getDoctorId();
         String month = historyRequestDto.getMonth();
-
-        //boolean isTreated = invoiceRepository.isTreated(patientId);
-        Invoice invoice = invoiceRepository.findByPatientId(patientId);
-
-//        if(!isTreated) {
-//            invoice.setTreated(true);
-//        }
-//
-//
-//        boolean isFirstTIme = invoiceRepository.isFirstTime(patientId);
-//        if(isFirstTIme) {
-//            invoice.setFirstTime(false);
-//        }
-
-        //invoiceRepository.save(invoice);
         Doctor doctor = doctorRepository.findById(doctorId).get();
         int doctorPatientCount = doctor.getDoctorPatientCount();
         doctorPatientCount = doctorPatientCount - 1;

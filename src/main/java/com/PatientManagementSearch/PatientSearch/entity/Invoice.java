@@ -22,6 +22,5 @@ public class Invoice {
     private String patientName;
     private String doctorName;
     private boolean isFirstTime;
-    // private int noOfPreviousVisits;
     private boolean isTreated;
 }

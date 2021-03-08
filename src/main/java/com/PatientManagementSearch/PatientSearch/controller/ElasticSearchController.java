@@ -22,26 +22,12 @@ public class ElasticSearchController {
         return searchService.getPatientRecordFromHistory(text);
     }
 
-
     @PostMapping(value = "/save")
     public History saveDetails(@RequestBody History history)
     {
         return searchService.save(history);
     }
 
-//
-//    @GetMapping(value = "/byMonth/{month}")
-//    public List<HistoryResponseDto> getByMonth(@PathVariable("month") String month)
-//    {
-//        return searchService.getByMonth(month);
-//    }
-//
-//
-//    @GetMapping(value = "/byIssue/{issue}")
-//    public List<HistoryResponseDto> getByIssue(@PathVariable("issue") String issue)
-//    {
-//        return searchService.getByIssue(issue);
-//    }
 
     @GetMapping(value = "/findAll")
     public List<History> findAll()

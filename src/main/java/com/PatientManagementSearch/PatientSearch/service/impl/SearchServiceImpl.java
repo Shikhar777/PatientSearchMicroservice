@@ -34,15 +34,13 @@ public class SearchServiceImpl implements SearchService {
     private HistoryRepository historyRepository;
 
     @Override
-    public History save(History history)
-    {
+    public History save(History history) {
         History history1 = historyRepository.save(history);
         return searchRepository.save(history1);
     }
 
     @Override
-    public List<History> findAll()
-    {
+    public List<History> findAll() {
         List<History> list = new ArrayList<>();
         Iterable<History> historyIterable = searchRepository.findAll();
         historyIterable.forEach(list::add);
@@ -50,14 +48,13 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
-    public List<History> getPatientRecordFromHistory(String text)
-    {
-        text =  text.replace(" ","+");
+    public List<History> getPatientRecordFromHistory(String text) {
+        text = text.replace(" ", "+");
         QueryBuilder queryBuilder = QueryBuilders.boolQuery().should(QueryBuilders.queryStringQuery(text)
-        .lenient(true).field("issue").fuzziness(Fuzziness.fromEdits(2)).field("month").fuzziness(Fuzziness.fromEdits(2))
+                .lenient(true).field("issue").fuzziness(Fuzziness.fromEdits(2)).field("month").fuzziness(Fuzziness.fromEdits(2))
                 .field("patientName").fuzziness(Fuzziness.fromEdits(2)).field("patientId").fuzziness(Fuzziness.fromEdits(2))).
                 should(QueryBuilders.queryStringQuery("*" + text + "*")
-        .lenient(true).field("issue").fuzziness(Fuzziness.fromEdits(2)).field("month").fuzziness(Fuzziness.fromEdits(2))
+                        .lenient(true).field("issue").fuzziness(Fuzziness.fromEdits(2)).field("month").fuzziness(Fuzziness.fromEdits(2))
                         .field("patientName").fuzziness(Fuzziness.fromEdits(2)).field("patientId").fuzziness(Fuzziness.fromEdits(2)));
 
         NativeSearchQuery nativeSearchQuery = new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
@@ -65,40 +62,4 @@ public class SearchServiceImpl implements SearchService {
                 IndexCoordinates.of("test3"));
         return historyList;
     }
-
-//    @Override
-//    public List<HistoryResponseDto> getByMonth(String month)
-//    {
-//        List<HistoryResponseDto> historyResponseDtoList = new ArrayList<>();
-//
-//        List<History> historyList = historyRepository.getByMonth(month);
-//
-//        for(History history: historyList) {
-//            HistoryResponseDto historyResponseDto = new HistoryResponseDto();
-//            historyResponseDto.setDoctorName(history.getDoctorName());
-//            historyResponseDto.setIssue(history.getIssue());
-//            historyResponseDto.setMonth(history.getMonth());
-//            historyResponseDto.setPatientName(history.getPatientName());
-//            historyResponseDto.setPatientId(history.getPatientId());
-//            historyResponseDtoList.add(historyResponseDto);
-//        }
-//        return historyResponseDtoList;
-//    }
-
-//    @Override
-//    public List<HistoryResponseDto> getByIssue(String issue)
-//    {
-//        List<HistoryResponseDto> historyResponseDtoList = new ArrayList<>();
-//        List<History> historyList = historyRepository.getByIssue(issue);
-//        for(History history: historyList) {
-//            HistoryResponseDto historyResponseDto = new HistoryResponseDto();
-//            historyResponseDto.setDoctorName(history.getDoctorName());
-//            historyResponseDto.setIssue(history.getIssue());
-//            historyResponseDto.setMonth(history.getMonth());
-//            historyResponseDto.setPatientName(history.getPatientName());
-//            historyResponseDto.setPatientId(history.getPatientId());
-//            historyResponseDtoList.add(historyResponseDto);
-//        }
-//        return historyResponseDtoList;
-//    }
 }
